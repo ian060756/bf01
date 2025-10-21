@@ -1,4 +1,4 @@
-export const NAV_ITEM = [
+export const NAV_ITEMS = [
     {path: "/" , label: "首頁", icon:"🥔"},
     {path: "/menu" , label: "點餐菜單", icon:"🛎"},
     {path: "/about" , label: "關於我們", icon:"⚠"},
@@ -6,7 +6,8 @@ export const NAV_ITEM = [
 ];
 
 export const isPathActive = (currentPath, targetPath) => {
-    if(currentPath=="/"&&targetPath=="/") return true;
-    return targetPath !="/" && currentPath.startswith(targetPath);
-
+    if (currentPath === "/" && targetPath === "/") return true;
+    if (!currentPath || !targetPath) return false;
+    if (targetPath === "/") return false;
+    return currentPath.startsWith(targetPath);
 };

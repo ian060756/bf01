@@ -1,30 +1,30 @@
 import {Link} from "react-router-dom";
 
 export default function NavLinks({
-    item,
+    items = [],
     isActive,
     onItemClick,
     listClassName,
-    listProp,
+    listProps,
 }){
-    return(
-        <ul className={listClassName} {...listProp}>{item.map((item)=>(
-                <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className={`flex item-center gap-2 ${
-                        isActive && isActive(item.path)
-                        ? "active bg-primary text-primary-content"
-                        : "hover:bg-base-200"
-                      }`}
-                      onClick={()=> onItemClick?.(item)}
-                >
+    return (
+        <div className={listClassName} {...listProps}>
+            {items.map((item) => (
+                <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex item-center gap-2 px-2 rounded ${
+                       isActive?.(item.path)
+                          ? "active bg-primary text-primary-content"
+                          : "hover:bg-base-200"
+                    }`}
+                    onClick={()=> onItemClick?.(item)}
+                    >
                     <span className="text-lg">{item.icon}</span>
                     {item.label}
-                </Link>
-                </li>
-            ))}
-            </ul>    
-            
+                    </Link>
+                
+            ))}    
+        </div>
     )
 };
